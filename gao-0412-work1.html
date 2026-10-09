@@ -3,144 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的网页</title>
+<title>DeepSeek · 深度求索</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: "Microsoft YaHei", Arial, sans-serif;
-    background: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    background: #0a0e1a;
+    color: #e6f0ff;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* 顶部导航栏 */
+  /* 背景光晕 */
+  .glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow.a {
+    width: 600px; height: 600px;
+    background: rgba(45,120,255,.35);
+    top: -200px; left: -150px;
+  }
+  .glow.b {
+    width: 500px; height: 500px;
+    background: rgba(0,200,255,.25);
+    bottom: -180px; right: -120px;
+  }
+
+  /* 网格背景 */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(90,180,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,180,255,.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* 顶部导航 */
   header {
-    background: #2c3e50;
-    color: #fff;
-    padding: 0 40px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    background: rgba(10,14,26,.75);
+    backdrop-filter: blur(16px);
+    height: 68px;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(90,180,255,.15);
   }
-  .logo { font-size: 22px; font-weight: bold; letter-spacing: 2px; }
-  nav a {
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 700;
     color: #fff;
+    letter-spacing: .5px;
+  }
+  .logo .whale {
+    font-size: 26px;
+    filter: drop-shadow(0 0 12px rgba(90,180,255,.8));
+  }
+  .logo span { color: #4d9fff; }
+  nav a {
+    color: #a8c4e0;
     text-decoration: none;
-    margin-left: 28px;
+    margin-left: 32px;
     font-size: 15px;
     transition: color .3s;
   }
-  nav a:hover { color: #1abc9c; }
+  nav a:hover { color: #4d9fff; }
 
-  /* 横幅 */
-  .banner {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 80px 20px;
+    padding: 110px 24px 80px;
+    max-width: 900px;
+    margin: 0 auto;
   }
-  .banner h1 { font-size: 40px; margin-bottom: 16px; }
-  .banner p { font-size: 18px; opacity: .9; margin-bottom: 28px; }
-  .banner button {
-    background: #fff;
-    color: #764ba2;
-    border: none;
-    padding: 12px 36px;
-    font-size: 16px;
+  .hero .badge {
+    display: inline-block;
+    background: rgba(77,159,255,.12);
+    border: 1px solid rgba(77,159,255,.4);
+    color: #4d9fff;
+    font-size: 13px;
+    padding: 6px 18px;
     border-radius: 30px;
-    cursor: pointer;
-    transition: transform .2s, box-shadow .2s;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
   }
-  .banner button:hover {
+  .hero h1 {
+    font-size: 56px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 20%, #4d9fff 60%, #00d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 19px;
+    color: #a8c4e0;
+    line-height: 1.9;
+    margin-bottom: 44px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-group {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 42px;
+    font-size: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .25s;
+    font-weight: 600;
+  }
+  .btn.primary {
+    background: linear-gradient(135deg, #4d9fff, #0066ff);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(45,120,255,.45);
+  }
+  .btn.primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    box-shadow: 0 14px 40px rgba(45,120,255,.65);
+  }
+  .btn.ghost {
+    background: transparent;
+    color: #a8c4e0;
+    border: 1px solid rgba(90,180,255,.4);
+  }
+  .btn.ghost:hover {
+    border-color: #4d9fff;
+    color: #4d9fff;
   }
 
-  /* 卡片区 */
-  .cards {
+  /* 数据条 */
+  .stats {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto 100px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+  .stat {
+    background: rgba(20,35,65,.5);
+    border: 1px solid rgba(90,180,255,.18);
+    border-radius: 14px;
+    padding: 28px 16px;
+    transition: border-color .3s;
+  }
+  .stat:hover { border-color: rgba(77,159,255,.5); }
+  .stat .num {
+    font-size: 32px;
+    font-weight: 800;
+    color: #4d9fff;
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(77,159,255,.5);
+  }
+  .stat .label { font-size: 14px; color: #8aa8c8; }
+
+  /* 功能区 */
+  .section-title {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 24px;
+  }
+  .section-title h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .section-title p { color: #8aa8c8; font-size: 16px; }
+
+  .features {
+    position: relative;
+    z-index: 1;
     max-width: 1100px;
-    margin: 60px auto;
-    padding: 0 20px;
+    margin: 0 auto 100px;
+    padding: 0 24px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    gap: 24px;
   }
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.06);
-    transition: transform .25s, box-shadow .25s;
+  .feature {
+    background: linear-gradient(180deg, rgba(20,35,65,.7), rgba(15,25,50,.5));
+    border: 1px solid rgba(90,180,255,.18);
+    border-radius: 18px;
+    padding: 34px 28px;
+    transition: all .3s;
   }
-  .card:hover {
+  .feature:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+    border-color: rgba(77,159,255,.55);
+    box-shadow: 0 20px 50px rgba(45,120,255,.25);
   }
-  .card .icon { font-size: 36px; margin-bottom: 14px; }
-  .card h3 { font-size: 20px; margin-bottom: 10px; color: #2c3e50; }
-  .card p { font-size: 14px; color: #666; }
+  .feature .icon {
+    width: 52px; height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    border-radius: 14px;
+    background: rgba(77,159,255,.12);
+    border: 1px solid rgba(77,159,255,.3);
+    margin-bottom: 20px;
+  }
+  .feature h3 { font-size: 20px; color: #fff; margin-bottom: 12px; }
+  .feature p { font-size: 14px; color: #8aa8c8; line-height: 1.9; }
+
+  /* CTA */
+  .cta {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto 100px;
+    padding: 60px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(45,120,255,.15), rgba(0,212,255,.08));
+    border: 1px solid rgba(77,159,255,.3);
+    border-radius: 24px;
+  }
+  .cta h2 { font-size: 32px; color: #fff; margin-bottom: 16px; }
+  .cta p { color: #a8c4e0; font-size: 16px; margin-bottom: 32px; }
 
   /* 页脚 */
   footer {
-    background: #2c3e50;
-    color: #bbb;
+    position: relative;
+    z-index: 1;
     text-align: center;
-    padding: 24px;
+    padding: 40px 24px 50px;
+    color: #5a7a9a;
     font-size: 14px;
-    margin-top: 60px;
+    border-top: 1px solid rgba(90,180,255,.12);
   }
+  footer .links { margin-bottom: 16px; }
+  footer .links a {
+    color: #8aa8c8;
+    text-decoration: none;
+    margin: 0 14px;
+    transition: color .3s;
+  }
+  footer .links a:hover { color: #4d9fff; }
 
   /* 响应式 */
-  @media (max-width: 768px) {
-    .cards { grid-template-columns: 1fr; }
-    .banner h1 { font-size: 28px; }
-    nav a { margin-left: 14px; font-size: 13px; }
+  @media (max-width: 860px) {
+    header { padding: 0 20px; }
+    nav a { margin-left: 16px; font-size: 13px; }
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .features { grid-template-columns: 1fr; }
+    .cta { padding: 44px 24px; }
   }
 </style>
 </head>
 <body>
 
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+  <div class="grid-bg"></div>
+
   <header>
-    <div class="logo">MySite</div>
+    <div class="logo">
+      <span class="whale">🐋</span>
+      Deep<span>Seek</span>
+    </div>
     <nav>
       <a href="#">首页</a>
+      <a href="#">模型</a>
+      <a href="#">研究</a>
+      <a href="#">API</a>
       <a href="#">关于</a>
-      <a href="#">服务</a>
-      <a href="#">联系</a>
     </nav>
   </header>
 
-  <section class="banner">
-    <h1>欢迎来到我的网页</h1>
-    <p>这是一个用 HTML + CSS 编写的示例页面</p>
-    <button>了解更多</button>
+  <section class="hero">
+    <div class="badge">深度求索 · DeepSeek-V3</div>
+    <h1>探索智能的<br>无限可能</h1>
+    <p>我们致力于通用人工智能的研究，用最前沿的技术，让智能触手可及。从开源模型到强大 API，DeepSeek 与你一同前行。</p>
+    <div class="btn-group">
+      <a href="#" class="btn primary">开始体验</a>
+      <a href="#" class="btn ghost">查看文档</a>
+    </div>
   </section>
 
-  <section class="cards">
-    <div class="card">
-      <div class="icon">🎨</div>
-      <h3>精美设计</h3>
-      <p>简洁大方的界面，给你舒适的浏览体验。</p>
+  <section class="stats">
+    <div class="stat">
+      <div class="num">671B</div>
+      <div class="label">参数规模</div>
     </div>
-    <div class="card">
+    <div class="stat">
+      <div class="num">128K</div>
+      <div class="label">上下文长度</div>
+    </div>
+    <div class="stat">
+      <div class="num">100+</div>
+      <div class="label">支持语言</div>
+    </div>
+    <div class="stat">
+      <div class="num">∞</div>
+      <div class="label">探索可能</div>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>为什么选择 DeepSeek</h2>
+    <p>强大、开放、可靠的人工智能</p>
+  </div>
+
+  <section class="features">
+    <div class="feature">
+      <div class="icon">🧠</div>
+      <h3>强大推理能力</h3>
+      <p>基于领先的 MoE 架构，在数学、编程、逻辑推理等任务上表现出色，助你解决复杂问题。</p>
+    </div>
+    <div class="feature">
       <div class="icon">⚡</div>
-      <h3>快速响应</h3>
-      <p>适配手机和电脑，随时随地都能访问。</p>
+      <h3>极速响应</h3>
+      <p>优化的推理引擎，毫秒级响应速度，让每一次对话都流畅自然，不打断你的思路。</p>
     </div>
-    <div class="card">
-      <div class="icon">🚀</div>
-      <h3>易于扩展</h3>
-      <p>结构清晰，方便你继续添加新功能。</p>
+    <div class="feature">
+      <div class="icon">🔓</div>
+      <h3>开放开源</h3>
+      <p>坚持开源理念，模型权重与论文公开，与全球开发者共同推动 AI 技术边界。</p>
     </div>
+    <div class="feature">
+      <div class="icon">🌊</div>
+      <h3>超长上下文</h3>
+      <p>支持 128K 上下文窗口，一次处理长文档、整本书、大型代码库，不再担心截断。</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🛡️</div>
+      <h3>安全可靠</h3>
+      <p>严格的安全对齐与内容审查机制，确保输出内容符合规范，保护用户隐私。</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🌐</div>
+      <h3>多语言支持</h3>
+      <p>流畅处理中文、英文、日文、代码等 100+ 种语言，服务全球用户无障碍沟通。</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>准备好和 DeepSeek 一起探索了吗？</h2>
+    <p>免费使用，无需信用卡，即刻开始你的智能之旅。</p>
+    <a href="#" class="btn primary">立即开始</a>
   </section>
 
   <footer>
-    © 2026 MySite 版权所有
+    <div class="links">
+      <a href="#">产品</a>
+      <a href="#">文档</a>
+      <a href="#">博客</a>
+      <a href="#">GitHub</a>
+      <a href="#">联系我们</a>
+    </div>
+    <div>© 2026 DeepSeek · 深度求索 · 保留所有权利</div>
   </footer>
 
 </body>
