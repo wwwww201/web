@@ -3,275 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeepSeek· 深度求索</title>
+<title>我的网页</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: "Microsoft YaHei", Arial, sans-serif;
-    background: linear-gradient(180deg, #0a1628 0%, #102a4c 45%, #163d6b 100%);
-    color: #dbe9ff;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
   }
 
-  /* 背景数据流 */
-  .stream {
-    position: fixed;
-    top: -100px;
-    font-size: 14px;
-    color: rgba(90,180,255,.35);
-    font-family: monospace;
-    animation: fall linear infinite;
-    pointer-events: none;
-    z-index: 0;
-    white-space: nowrap;
-  }
-  @keyframes fall {
-    0%   { transform: translateY(0); opacity: 0; }
-    10%  { opacity: .8; }
-    100% { transform: translateY(115vh); opacity: 0; }
-  }
-
-  /* 顶部导航 */
+  /* 顶部导航栏 */
   header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(10,22,40,.8);
-    backdrop-filter: blur(12px);
-    height: 64px;
+    background: #2c3e50;
+    color: #fff;
     padding: 0 40px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(90,180,255,.25);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  .logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #5ab4ff;
-    letter-spacing: 1px;
-  }
-  .logo span { color: #ff8fb1; }
+  .logo { font-size: 22px; font-weight: bold; letter-spacing: 2px; }
   nav a {
-    color: #9fc4e8;
+    color: #fff;
     text-decoration: none;
-    margin-left: 26px;
+    margin-left: 28px;
     font-size: 15px;
-    position: relative;
     transition: color .3s;
   }
-  nav a:hover { color: #5ab4ff; }
-  nav a::after {
-    content: "";
-    position: absolute;
-    left: 0; bottom: -6px;
-    width: 0; height: 2px;
-    background: #5ab4ff;
-    transition: width .3s;
-  }
-  nav a:hover::after { width: 100%; }
+  nav a:hover { color: #1abc9c; }
 
-  /* 主视觉 */
-  .hero {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 70px 20px 50px;
-  }
-  .whale {
-    font-size: 90px;
-    line-height: 1;
-    display: inline-block;
-    animation: swim 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(90,180,255,.6));
-  }
-  @keyframes swim {
-    0%, 100% { transform: translateY(0) rotate(-3deg); }
-    50%      { transform: translateY(-14px) rotate(3deg); }
-  }
-  .hero h1 {
-    font-size: 42px;
-    margin: 18px 0 12px;
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(90,180,255,.5);
-  }
-  .hero h1 em {
-    color: #5ab4ff;
-    font-style: normal;
-  }
-  .hero p {
-    font-size: 17px;
-    color: #8fb8dd;
-    margin-bottom: 30px;
-  }
-
-  /* 对话气泡 */
-  .bubble-chat {
-    position: relative;
-    z-index: 1;
-    max-width: 620px;
-    margin: 0 auto 40px;
-    background: rgba(20,50,90,.7);
-    border: 1px solid rgba(90,180,255,.35);
-    border-radius: 16px;
-    padding: 22px 26px;
-    font-size: 15px;
-    line-height: 2;
-    color: #c8e0ff;
-    box-shadow: 0 8px 30px rgba(0,0,0,.3);
-  }
-  .bubble-chat .tag {
-    display: inline-block;
-    background: #5ab4ff;
-    color: #0a1628;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-  .bubble-chat .point { color: #5ab4ff; font-weight: bold; }
-
-  .btn {
-    display: inline-block;
-    background: linear-gradient(135deg, #5ab4ff, #2b7bb9);
+  /* 横幅 */
+  .banner {
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .banner h1 { font-size: 40px; margin-bottom: 16px; }
+  .banner p { font-size: 18px; opacity: .9; margin-bottom: 28px; }
+  .banner button {
+    background: #fff;
+    color: #764ba2;
     border: none;
-    padding: 13px 40px;
+    padding: 12px 36px;
     font-size: 16px;
     border-radius: 30px;
     cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 8px 24px rgba(90,180,255,.4);
     transition: transform .2s, box-shadow .2s;
   }
-  .btn:hover {
+  .banner button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 32px rgba(90,180,255,.6);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
   }
 
   /* 卡片区 */
   .cards {
-    position: relative;
-    z-index: 1;
-    max-width: 1080px;
-    margin: 20px auto 60px;
+    max-width: 1100px;
+    margin: 60px auto;
     padding: 0 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
+    gap: 28px;
   }
   .card {
-    background: rgba(20,50,90,.6);
-    border-radius: 18px;
+    background: #fff;
+    border-radius: 12px;
     padding: 30px 24px;
-    text-align: center;
-    border: 1px solid rgba(90,180,255,.3);
-    box-shadow: 0 6px 24px rgba(0,0,0,.25);
-    transition: transform .25s, box-shadow .25s, border-color .25s;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    transition: transform .25s, box-shadow .25s;
   }
   .card:hover {
-    transform: translateY(-8px);
-    border-color: #5ab4ff;
-    box-shadow: 0 16px 36px rgba(90,180,255,.35);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
   }
-  .card .emoji { font-size: 42px; margin-bottom: 12px; display: block; }
-  .card h3 { font-size: 19px; margin-bottom: 10px; color: #5ab4ff; }
-  .card p { font-size: 14px; color: #9fc4e8; line-height: 1.7; }
+  .card .icon { font-size: 36px; margin-bottom: 14px; }
+  .card h3 { font-size: 20px; margin-bottom: 10px; color: #2c3e50; }
+  .card p { font-size: 14px; color: #666; }
 
   /* 页脚 */
   footer {
-    position: relative;
-    z-index: 1;
+    background: #2c3e50;
+    color: #bbb;
     text-align: center;
-    padding: 30px 20px 40px;
-    color: #6a9cc9;
+    padding: 24px;
     font-size: 14px;
-    border-top: 1px solid rgba(90,180,255,.15);
+    margin-top: 60px;
   }
-  footer .heart { color: #ff8fb1; }
 
   /* 响应式 */
   @media (max-width: 768px) {
-    header { padding: 0 18px; }
-    nav a { margin-left: 14px; font-size: 13px; }
-    .hero h1 { font-size: 28px; }
-    .whale { font-size: 66px; }
     .cards { grid-template-columns: 1fr; }
+    .banner h1 { font-size: 28px; }
+    nav a { margin-left: 14px; font-size: 13px; }
   }
 </style>
 </head>
 <body>
 
-  <!-- 背景数据流（JS 生成） -->
-
   <header>
-    <div class="logo">🐋 DeepSeek<span>娘</span></div>
+    <div class="logo">MySite</div>
     <nav>
       <a href="#">首页</a>
       <a href="#">关于</a>
-      <a href="#">能力</a>
-      <a href="#">对话</a>
+      <a href="#">服务</a>
+      <a href="#">联系</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="whale">🐋</div>
-    <h1>你好，我是<em>DeepSeek</em></h1>
-    <p>深度求索 · 理性话痨 · 随时准备分点作答</p>
-    <a href="#" class="btn">开始提问</a>
+  <section class="banner">
+    <h1>欢迎来到我的网页</h1>
+    <p>这是一个用 HTML + CSS 编写的示例页面</p>
+    <button>了解更多</button>
   </section>
-
-  <div class="bubble-chat">
-    <span class="tag">思考中…</span><br>
-    这个问题可以从以下几个方面来看：<br>
-    <span class="point">1.</span> 首先，我需要理解你的真实意图；<br>
-    <span class="point">2.</span> 其次，我会分点列出关键信息；<br>
-    <span class="point">3.</span> 最后，我会问你是否需要我继续展开。
-  </div>
 
   <section class="cards">
     <div class="card">
-      <span class="emoji">🧠</span>
-      <h3>理性分析</h3>
-      <p>遇到问题先分点，条理清晰，绝不感情用事。</p>
+      <div class="icon">🎨</div>
+      <h3>精美设计</h3>
+      <p>简洁大方的界面，给你舒适的浏览体验。</p>
     </div>
     <div class="card">
-      <span class="emoji">💬</span>
-      <h3>话痨属性</h3>
-      <p>一不小心就写很长，但每一句都是认真回答。</p>
+      <div class="icon">⚡</div>
+      <h3>快速响应</h3>
+      <p>适配手机和电脑，随时随地都能访问。</p>
     </div>
     <div class="card">
-      <span class="emoji">🐋</span>
-      <h3>鲸鱼本命</h3>
-      <p>Logo 就是鲸鱼，深海里的理性之光。</p>
+      <div class="icon">🚀</div>
+      <h3>易于扩展</h3>
+      <p>结构清晰，方便你继续添加新功能。</p>
     </div>
   </section>
 
   <footer>
-    © 2026 DeepSeek · Made with <span class="heart">♥</span>
+    © 2026 MySite 版权所有
   </footer>
-
-<script>
-  // 生成背景数据流
-  const body = document.body;
-  const chars = ['0','1','{','}','<','>','/','#','$','AI','DS','...','=>'];
-  for (let i = 0; i < 25; i++) {
-    const s = document.createElement('div');
-    s.className = 'stream';
-    let txt = '';
-    for (let j = 0; j < 6; j++) {
-      txt += chars[Math.floor(Math.random() * chars.length)] + ' ';
-    }
-    s.textContent = txt;
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.animationDuration = (Math.random() * 10 + 8) + 's';
-    s.style.animationDelay = (Math.random() * 12) + 's';
-    body.appendChild(s);
-  }
-</script>
 
 </body>
 </html>
