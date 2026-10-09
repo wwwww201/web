@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的网页</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* 顶部导航栏 */
+  header {
+    background: #2c3e50;
+    color: #fff;
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { font-size: 22px; font-weight: bold; letter-spacing: 2px; }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 15px;
+    transition: color .3s;
+  }
+  nav a:hover { color: #1abc9c; }
+
+  /* 横幅 */
+  .banner {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  .banner h1 { font-size: 40px; margin-bottom: 16px; }
+  .banner p { font-size: 18px; opacity: .9; margin-bottom: 28px; }
+  .banner button {
+    background: #fff;
+    color: #764ba2;
+    border: none;
+    padding: 12px 36px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .banner button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+  }
+
+  /* 卡片区 */
+  .cards {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+  }
+  .card .icon { font-size: 36px; margin-bottom: 14px; }
+  .card h3 { font-size: 20px; margin-bottom: 10px; color: #2c3e50; }
+  .card p { font-size: 14px; color: #666; }
+
+  /* 页脚 */
+  footer {
+    background: #2c3e50;
+    color: #bbb;
+    text-align: center;
+    padding: 24px;
+    font-size: 14px;
+    margin-top: 60px;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .cards { grid-template-columns: 1fr; }
+    .banner h1 { font-size: 28px; }
+    nav a { margin-left: 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">MySite</div>
+    <nav>
+      <a href="#">首页</a>
+      <a href="#">关于</a>
+      <a href="#">服务</a>
+      <a href="#">联系</a>
+    </nav>
+  </header>
+
+  <section class="banner">
+    <h1>欢迎来到我的网页</h1>
+    <p>这是一个用 HTML + CSS 编写的示例页面</p>
+    <button>了解更多</button>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <div class="icon">🎨</div>
+      <h3>精美设计</h3>
+      <p>简洁大方的界面，给你舒适的浏览体验。</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>快速响应</h3>
+      <p>适配手机和电脑，随时随地都能访问。</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>易于扩展</h3>
+      <p>结构清晰，方便你继续添加新功能。</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 MySite 版权所有
+  </footer>
+
+</body>
+</html>
