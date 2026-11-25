@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>城市诗歌朗诵夜 · Poetry Reading Night</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', '华文细黑', 'Microsoft YaHei', sans-serif;
+            background-color: #f2ede8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        /* ---------- 必须保留的 .page 样式（背景色除外不可修改） ---------- */
+        .page {
+            display: inline-block;
+            background-color: #FFF6D9;      /* 学号末位2：奶油米黄 */
+            box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+            text-align: left;
+            max-width: 720px;
+            width: 100%;
+            padding: 28px 32px 20px 32px;
+            border-radius: 4px;
+            color: #2e2e2e;
+        }
+
+        /* ---------- 并集选择器 ---------- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Georgia', '宋体', serif;
+            letter-spacing: 0.5px;
+            color: #3e2e1f;
+            margin-bottom: 0.6em;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 2.2rem;
+            border-left: 8px solid #3e2e1f;
+            padding-left: 18px;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 0.4rem;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ---------- 后代选择器 div table a ---------- */
+        div table a {
+            text-decoration: underline wavy #c45a1b;
+            font-weight: 600;
+            color: #4b2e0e;
+            transition: color 0.2s;
+        }
+        div table a:hover {
+            color: #b34100;
+            text-decoration: underline wavy #b34100;
+        }
+
+        /* ---------- 链接伪类 ---------- */
+        a:link {
+            color: #2a4d7c;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:visited {
+            color: #6a4e7a;
+        }
+        a:hover {
+            color: #c4450c;
+            text-decoration: underline;
+        }
+        a:active {
+            color: #d97f0e;
+        }
+
+        /* ---------- ID 选择器 ---------- */
+        p#intro {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #a13300;
+            background-color: rgba(255, 250, 240, 0.85);
+            padding: 12px 18px;
+            border-radius: 12px;
+            border-left: 6px solid #c44f1b;
+            margin: 18px 0;
+            box-shadow: 0 2px 6px rgba(120, 60, 20, 0.1);
+        }
+
+        /* ---------- 带类名的链接 ---------- */
+        a.red {
+            color: #b22222;
+            font-weight: 700;
+            text-decoration: underline dotted #b22222;
+            background-color: rgba(255, 235, 220, 0.6);
+            padding: 3px 6px;
+            border-radius: 6px;
+        }
+        a.red:hover {
+            background-color: #ffd9b3;
+            color: #8b0000;
+        }
+        a.blue {
+            color: #1a4c8c;
+            font-weight: 700;
+            text-decoration: underline dotted #1a4c8c;
+            background-color: rgba(220, 240, 255, 0.7);
+            padding: 3px 6px;
+            border-radius: 6px;
+        }
+        a.blue:hover {
+            background-color: #cce6ff;
+            color: #0a2e5c;
+        }
+
+        /* ---------- 伪元素 ---------- */
+        p::first-letter {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #a34f1a;
+            float: left;
+            line-height: 0.9;
+            margin-right: 6px;
+            font-family: 'Georgia', serif;
+            text-shadow: 1px 1px 0 rgba(255, 255, 200, 0.8);
+        }
+        .page div::first-line {
+            font-weight: 600;
+            background-color: rgba(255, 240, 215, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ---------- 各区域 ---------- */
+        .section {
+            margin-bottom: 32px;
+        }
+        .intro-text p {
+            margin-bottom: 1em;
+            line-height: 1.65;
+            font-size: 1rem;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fffcf5;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(90, 60, 30, 0.15);
+            margin: 18px 0 8px 0;
+        }
+        th, td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid #f0dbc0;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f3d9b1;
+            font-weight: 700;
+            color: #3d2b16;
+            font-size: 1rem;
+            border-bottom: 2px solid #bc8f5c;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        td {
+            font-size: 0.98rem;
+            color: #2a2a2a;
+        }
+        .link-section {
+            background-color: #fff8eb;
+            padding: 16px 22px;
+            border-radius: 18px;
+            border: 1px solid #e6cba8;
+            margin: 6px 0 10px 0;
+        }
+        .link-section div {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        .link-section a {
+            display: inline-block;
+            margin-right: 14px;
+        }
+        .notice {
+            background-color: #3e2e1f;
+            color: #ffefdb;
+            padding: 20px 24px;
+            border-radius: 16px;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            margin-top: 26px;
+            box-shadow: inset 0 0 0 1px #b9976b;
+            border-left: 10px solid #a3511a;
+        }
+        .notice p {
+            margin-bottom: 10px;
+        }
+        .notice p:last-child {
+            margin-bottom: 0;
+        }
+        .notice::first-line {
+            color: #ffe1b3;
+        }
+        .notice a {
+            color: #ffd9a3;
+            text-decoration: underline dotted;
+        }
+        .notice a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- ① 顶部标题区 -->
+        <div class="section">
+            <h1>🌙 城市诗歌朗诵夜 · Poetry Reading Night</h1>
+        </div>
+
+        <!-- ② 活动介绍区 -->
+        <div class="section intro-text">
+            <h2 id="intro">在城市的夜里，读一首诗</h2>
+            <p>
+                城市诗歌朗诵夜是一场属于所有爱诗之人的聚会。我们相信，诗歌不是远在书斋里的古董，而是街头巷尾、地铁站台、深夜便利店旁随时可能涌现的呼吸。每个月的第二个周六晚上七点，我们会在一间安静的独立书店或社区空间里，关掉手机提示音，只留一盏暖黄的灯，轮流朗读自己心爱的诗篇——可以是经典，可以是原创，也可以是某个瞬间记下的三行短句。
+            </p>
+            <p>
+                在这里，有人读北岛，有人读聂鲁达，也有人读自己写在备忘录里的小诗。我们不设评委，不排名次，只在乎声音与文字相遇时那份真实的触动。也许你会在某个停顿里想起故乡的月亮，也许会在某句比喻中与陌生人的心事撞个满怀。诗歌朗诵夜不要求你有朗诵经验，只需要你愿意开口，或者愿意聆听。
+            </p>
+            <p>
+                古人说：“举头望明月，低头思故乡。”城市的夜晚或许看不见太多星星，但当我们围坐在一起，把诗句念出声来，那些被生活磨钝的感受便会重新变得锋利而柔软。这一晚，让我们把诗歌还给声音，把声音还给彼此。朗诵结束后有自由交流时间，你可以带上自己写的诗，也可以只是来坐坐，喝一杯热茶。
+            </p>
+            <p id="intro">📌 重要提示：活动免费，但场地有限，请提前在报名表登记。建议自带一本诗集或手机里存好想读的诗，现场提供少量诗集可供借阅。</p>
+        </div>
+
+        <!-- ③ 活动报名信息表格区 -->
+        <div class="section">
+            <h3>✨ 本期朗诵者报名表 · Readers List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>朗诵篇目</th>
+                        <th>诗歌风格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>林晚</td>
+                        <td>《过程》· 林白</td>
+                        <td>当代抒情</td>
+                    </tr>
+                    <tr>
+                        <td>周野</td>
+                        <td>《我用什么才能留住你》· 博尔赫斯</td>
+                        <td>外国译诗</td>
+                    </tr>
+                    <tr>
+                        <td>苏禾</td>
+                        <td>《面朝大海，春暖花开》· 海子</td>
+                        <td>经典现代诗</td>
+                    </tr>
+                    <tr>
+                        <td>陈默</td>
+                        <td>原创《城市夜行》</td>
+                        <td>个人原创</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ④ 页面链接区 -->
+        <div class="section link-section">
+            <div>
+                <a href="https://hongchenwusdnu.github.io/bookstore/job4.html" target="_blank" class="red">
+                    📸 查看往期活动照片（诗歌之夜剪影）
+                </a>
+                <a href=" https://wwwww201.github.io/web/gao-0412-work2.html" class="blue" target="_blank">
+                    💬 在线咨询活动详情（联系组织者）
+                </a>
+            </div>
+        </div>
+
+        <!-- ⑤ 底部公告区 -->
+        <div class="notice">
+            <p>
+                📢 公告一：本期诗歌朗诵夜时间为11月8日（周六）19:00。<br>
+                地点：城市之光独立书店二楼（地铁2号线文化宫站C口步行300米）。
+            </p>
+            <p>
+                📢 公告二：朗诵顺序按报名先后安排，每人5–8分钟。<br>
+                如需背景音乐或投影，请提前一天联系组织者。<br>
+                现场提供热水与简单茶点，欢迎自带杯子。
+            </p>
+            <p>
+                📢 公告三：活动结束后有“诗歌漂流”环节，可留下自己的诗集或带走一本有缘的诗集。<br>
+                更多往期回顾请访问 <a href="https://hongchenwusdnu.github.io/bookstore/job4.html" target="_blank">参考页面</a>。
+            </p>
+        </div>
+    </div>
+</body>
+</html>
